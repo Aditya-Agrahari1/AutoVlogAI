@@ -84,8 +84,9 @@ An admin panel is available to manage blog posts — including generating, editi
 
 ### 1. Clone the repository
 
-git clone https://github.com/Aditya-Agrahari1/AutoVlogAI.git
-cd AutoVlogAI
+ git clone https://github.com/Aditya-Agrahari1/AutoVlogAI.git
+ 
+ cd AutoVlogAI
 
 2. Create a virtual environment
 python -m venv venv
