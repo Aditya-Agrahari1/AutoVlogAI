@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Preview Generated Content</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 30px;
+            background: #f5f5f5;
+        }
+        .preview-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .post-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        .post-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            background-position: center;
+            background-size: cover;
+        }
+        .post-content {
+            padding: 20px;
+        }
+        .post-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .post-meta {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        .post-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .tag {
+            background: #e0e0e0;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 14px;
+        }
+        .actions {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        .button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .publish {
+            background: #1a237e;
+            color: white;
+        }
+        .edit {
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="preview-container">
+        <h1>Preview Generated Content</h1>
+        {% for post in posts %}
+        <div class="post-card">
+            {% if post.image_url %}
+            <div class="post-image" style="background-image: url('{{ post.image_url }}')"></div>
+            {% else %}
+            <div class="post-image" style="background-image: url('https://via.placeholder.com/800x400?text=Blog+Post+Image')"></div>
+            {% endif %}
+            <div class="post-content">
+                <h2 class="post-title">{{ post.title }}</h2>
+                <div class="post-meta">{{ post.meta_description }}</div>
+                <div class="post-body">{{ post.content | safe }}</div>
+                <div class="post-tags">
+                    {% for tag in post.hashtags %}
+                    <span class="tag">#{{ tag }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="actions">
+            <button class="button publish" onclick="window.location.href='/admin'">Publish All</button>
+            <button class="button edit" onclick="history.back()">Generate More</button>
+        </div>
+    </div>
+</body>
+</html>

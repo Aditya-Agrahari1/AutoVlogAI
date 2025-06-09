@@ -1,0 +1,40 @@
+<article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+    <div class="aspect-w-16 aspect-h-9">
+        {% if post.image_url %}
+        <img src="{{ post.image_url }}" 
+             alt="{{ post.title }}"
+             class="w-full h-48 object-cover"
+             onerror="this.src='https://placehold.co/800x400/e2e8f0/1a237e?text=Blog+Post+Image'">
+        {% else %}
+        <img src="https://placehold.co/800x400/e2e8f0/1a237e?text=Blog+Post+Image"
+             alt="{{ post.title }}"
+             class="w-full h-48 object-cover">
+        {% endif %}
+    </div>
+    <div class="p-6">
+        <div class="flex items-center gap-2 text-sm text-gray-500 mb-3">
+            <span>{{ post.created_at.strftime('%B %d, %Y') }}</span>
+            {% if post.views %}
+            <span>•</span>
+            <span>{{ post.views }} views</span>
+            {% endif %}
+        </div>
+
+        <h2 class="text-xl font-bold text-gray-900 mb-3 line-clamp-2 hover:text-blue-600">
+            {{ post.title }}
+        </h2>
+
+        <div class="text-gray-600 mb-4 line-clamp-3">
+            {{ post.content | safe | truncate(150) }}
+        </div>
+
+        <div class="flex flex-wrap gap-2 mt-auto">
+            {% for tag in post.hashtags %}
+            <a href="/{{ tag|lower|replace(' ', '-') }}" 
+               class="text-sm px-3 py-1 bg-blue-50 text-blue-600 rounded-full hover:bg-blue-100 transition-colors">
+                #{{ tag }}
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</article>

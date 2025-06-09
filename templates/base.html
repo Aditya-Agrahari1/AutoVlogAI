@@ -1,0 +1,452 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Blog Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            opacity: 1;
+            transition: opacity 0.3s ease-in-out;
+        }
+        
+        /* Enhanced hero background with animated pattern */
+        .hero-gradient {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(56, 189, 248, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(45, 212, 191, 0.05) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-10px) rotate(1deg); }
+            66% { transform: translateY(5px) rotate(-1deg); }
+        }
+        
+        /* AI Brain animation */
+        .ai-brain {
+            width: 120px;
+            height: 120px;
+            position: relative;
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { 
+                transform: scale(1);
+                filter: drop-shadow(0 0 20px rgba(45, 212, 191, 0.3));
+            }
+            50% { 
+                transform: scale(1.05);
+                filter: drop-shadow(0 0 30px rgba(45, 212, 191, 0.5));
+            }
+        }
+        
+        /* Animated circuits */
+        .circuit-line {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: draw 4s ease-in-out infinite;
+        }
+        
+        @keyframes draw {
+            0% { stroke-dashoffset: 1000; }
+            50% { stroke-dashoffset: 0; }
+            100% { stroke-dashoffset: -1000; }
+        }
+        
+        /* Enhanced tagline glow effect */
+        .tagline-glow {
+            background: linear-gradient(135deg, #06b6d4, #8b5cf6, #06b6d4);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient-shift 4s ease-in-out infinite;
+            text-shadow: 0 0 30px rgba(45, 212, 191, 0.3);
+        }
+        
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        /* CTA button enhancements */
+        .cta-primary {
+            background: linear-gradient(135deg, #06b6d4, #0891b2);
+            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .cta-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(6, 182, 212, 0.4);
+        }
+        
+        .cta-secondary {
+            border: 2px solid;
+            border-image: linear-gradient(135deg, #06b6d4, #8b5cf6) 1;
+            background: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .cta-secondary:hover {
+            background: rgba(6, 182, 212, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        /* Floating particles */
+        .particle {
+            position: absolute;
+            background: linear-gradient(45deg, #06b6d4, #8b5cf6);
+            border-radius: 50%;
+            animation: float-particle 15s linear infinite;
+        }
+        
+        @keyframes float-particle {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Scrolling carousel styles */
+        .scroll-container {
+            -webkit-mask-image: linear-gradient(90deg, transparent 0%, #fff 10%, #fff 90%, transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0%, #fff 10%, #fff 90%, transparent 100%);
+        }
+        
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); } 
+        }
+        
+        .scroll-content {
+            animation: scroll 40s linear infinite; 
+        }
+        
+        .scroll-content:hover {
+            animation-play-state: paused; 
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .ai-brain {
+                width: 80px;
+                height: 80px;
+            }
+        }
+    </style>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+
+<body class="bg-gray-900 text-gray-300 transition-all duration-300">
+    {% block hero_section %}
+    <!-- Enhanced Hero Section -->
+    <div class="hero-gradient text-gray-100 py-20 md:py-24 text-center w-full relative overflow-hidden">
+        <!-- Floating particles -->
+        <div class="particle w-2 h-2" style="left: 10%; animation-delay: 0s;"></div>
+        <div class="particle w-1 h-1" style="left: 20%; animation-delay: 5s;"></div>
+        <div class="particle w-3 h-3" style="left: 70%; animation-delay: 2s;"></div>
+        <div class="particle w-2 h-2" style="left: 80%; animation-delay: 8s;"></div>
+        <div class="particle w-1 h-1" style="left: 90%; animation-delay: 3s;"></div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center justify-center lg:justify-between max-w-6xl mx-auto">
+                <!-- Left side - Main content -->
+                <div class="lg:w-4/6 text-center lg:text-left mb-12 lg:mb-0">
+                    <!-- Main Heading -->
+                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight">
+                        <span class="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+                            Welcome to
+                        </span>
+                        <br>
+                        <span class="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
+                            Echo Mind
+                        </span>
+                    </h1>
+                    
+                    <!-- Enhanced Tagline -->
+                    <h2 class="text-2xl md:text-3xl lg:text-4xl mb-8 font-medium italic tagline-glow leading-relaxed">
+                        Discover the 'why' behind the 'what' — 
+                        <br class="hidden md:block">
+                        decoded by AI, shared with purpose.
+                    </h2>
+                    
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4 mb-12">
+                        <a href="{{ url_for('home') }}#featured-articles"
+                           class="cta-primary text-white font-semibold py-3 px-8 rounded-lg text-lg shadow-lg transform hover:scale-105 transition-transform duration-300 ease-in-out flex items-center justify-center">
+                            <i class="fas fa-search mr-3"></i> Explore Articles
+                        </a>
+                        <a href="{{ url_for('about_page') }}" 
+                           class="cta-secondary text-white font-semibold py-3 px-8 rounded-lg text-lg shadow-lg transform hover:scale-105 transition-transform duration-300 ease-in-out flex items-center justify-center">
+                            <i class="fas fa-info-circle mr-3"></i> About Echo AI
+                        </a>
+                    </div>
+                    
+                    <!-- Explore insights text -->
+                    
+                </div>
+                
+                <!-- Right side - AI Visual -->
+                <div class="lg:w-2/6 flex justify-center lg:justify-center lg:ml-8">
+                    <div class="ai-brain relative">
+                        <!-- AI Brain SVG -->
+                        <svg viewBox="0 0 120 120" class="w-full h-full">
+                            <!-- Brain outline -->
+                            <path d="M60 20c-15 0-25 10-30 20-5 10-5 20 0 30 5 15 15 25 30 25s25-10 30-25c5-10 5-20 0-30-5-10-15-20-30-20z" 
+                                  fill="none" 
+                                  stroke="url(#brainGradient)" 
+                                  stroke-width="2"/>
+                            
+                            <!-- Circuit lines -->
+                            <path d="M30 40 L50 45 L70 40 L90 45" 
+                                  fill="none" 
+                                  stroke="#06b6d4" 
+                                  stroke-width="1.5" 
+                                  class="circuit-line"/>
+                            <path d="M25 60 L45 55 L75 65 L95 60" 
+                                  fill="none" 
+                                  stroke="#8b5cf6" 
+                                  stroke-width="1.5" 
+                                  class="circuit-line"
+                                  style="animation-delay: 1s"/>
+                            <path d="M35 80 L55 75 L85 80" 
+                                  fill="none" 
+                                  stroke="#06b6d4" 
+                                  stroke-width="1.5" 
+                                  class="circuit-line"
+                                  style="animation-delay: 2s"/>
+                            
+                            <!-- Neural nodes -->
+                            <circle cx="45" cy="45" r="3" fill="#06b6d4" opacity="0.8">
+                                <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="75" cy="55" r="3" fill="#8b5cf6" opacity="0.8">
+                                <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite" begin="0.5s"/>
+                            </circle>
+                            <circle cx="60" cy="65" r="3" fill="#06b6d4" opacity="0.8">
+                                <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite" begin="1s"/>
+                            </circle>
+                            
+                            <!-- Gradients -->
+                            <defs>
+                                <linearGradient id="brainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:0.8" />
+                                    <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:0.8" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        
+                        <!-- AI text in center -->
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span class="text-xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+                                AI
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="text-center">
+                <p class="text-xl mb-6 font-medium">
+                  <span class="text-white">🚀</span>
+                  <span class="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent"> Explore insights across:</span>
+                </p>
+            </div>
+              
+            <!-- Scrolling Categories -->
+            <div class="mt-12">
+                <div class="scroll-container w-full">
+                    <div class="scroll-content inline-flex whitespace-nowrap">
+                        <span class="mx-6 text-lg text-teal-300 opacity-90">🚀 Startup Ecosystem</span>
+                        <span class="mx-6 text-lg text-purple-300 opacity-90">⚡ Productivity Tools</span>
+                        <span class="mx-6 text-lg text-cyan-300 opacity-90">💻 Dev Trends</span>
+                        <span class="mx-6 text-lg text-blue-300 opacity-90">🤖 Tech Ethics</span>
+                        <span class="mx-6 text-lg text-teal-300 opacity-90">🧘 Meditation & Mindfulness</span>
+                        <span class="mx-6 text-lg text-purple-300 opacity-90">📿 Vedic Philosophy</span>
+                        <span class="mx-6 text-lg text-cyan-300 opacity-90">💭 Lucid Dreaming</span>
+                        <span class="mx-6 text-lg text-blue-300 opacity-90">🔬 Habit Science</span>
+                        <!-- Duplicate for seamless loop -->
+                        <span class="mx-6 text-lg text-teal-300 opacity-90">🚀 Startup Ecosystem</span>
+                        <span class="mx-6 text-lg text-purple-300 opacity-90">⚡ Productivity Tools</span>
+                        <span class="mx-6 text-lg text-cyan-300 opacity-90">💻 Dev Trends</span>
+                        <span class="mx-6 text-lg text-blue-300 opacity-90">🤖 Tech Ethics</span>
+                        <span class="mx-6 text-lg text-teal-300 opacity-90">🧘 Meditation & Mindfulness</span>
+                        <span class="mx-6 text-lg text-purple-300 opacity-90">📿 Vedic Philosophy</span>
+                        <span class="mx-6 text-lg text-cyan-300 opacity-90">💭 Lucid Dreaming</span>
+                        <span class="mx-6 text-lg text-blue-300 opacity-90">🔬 Habit Science</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Bouncing Scroll Indicator -->
+            <div class="mt-16 flex flex-col items-center">
+                <p class="text-gray-300 text-sm mb-2 font-medium">Scroll for more insights</p>
+                <div class="text-cyan-400 text-2xl animate-bounce cursor-pointer" onclick="document.querySelector('main').scrollIntoView({ behavior: 'smooth' })">
+                    ↓
+                </div>
+            </div>
+        </div>
+        <!-- End of Enhanced Hero Section -->
+    {% endblock hero_section %}
+    
+        <!-- Navigation Bar -->
+        <nav class="bg-gray-800 shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-8 py-4">
+            <div class="flex justify-between items-center">
+                <a href="/" class="flex items-center space-x-3">
+                    <svg class="w-8 h-8 text-teal-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
+                    </svg>
+                    <span class="text-xl font-bold text-gray-100 hover:text-teal-300 transition">AI Blog</span>
+                </a>
+                <div class="flex items-center space-x-8">
+                    <div class="flex items-center space-x-4">
+                        <a href="/" class="px-4 py-2 rounded-lg bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-teal-300 transition-all duration-300">Home</a>
+                        <div class="relative group">
+                            <button class="px-4 py-2 rounded-lg bg-gray-700 text-gray-300 hover:text-teal-300 transition-all duration-300 flex items-center">
+                                Categories
+                                <svg class="w-4 h-4 ml-2 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <div class="absolute left-0 top-full mt-2 w-56 bg-gray-700 rounded-lg shadow-lg py-1 invisible opacity-0 scale-95 group-hover:visible group-hover:opacity-100 group-hover:scale-100 transition-all duration-200 ease-in-out z-50">
+                                <div class="absolute h-3 w-full -top-3"></div>
+                                <a href="/ai-news" class="block px-4 py-2 text-gray-300 hover:bg-gray-600 hover:text-teal-300 transition-colors duration-150">AI News</a>
+                                <a href="/startup-ecosystem" class="block px-4 py-2 text-gray-300 hover:bg-gray-600 hover:text-teal-300 transition-colors duration-150">Startup Ecosystem</a>
+                                <a href="/productivity-tools" class="block px-4 py-2 text-gray-300 hover:bg-gray-600 hover:text-teal-300 transition-colors duration-150">Productivity Tools</a>
+                                <a href="/dev-trends" class="block px-4 py-2 text-gray-300 hover:bg-gray-600 hover:text-teal-300 transition-colors duration-150">Dev Trends</a>
+                                <a href="/tech-ethics" class="block px-4 py-2 text-gray-300 hover:bg-gray-600 hover:text-teal-300 transition-colors duration-150">Tech Ethics</a>
+                                <a href="/meditation-mindfulness" class="block px-4 py-2 text-gray-300 hover:bg-gray-600 hover:text-teal-300 transition-colors duration-150">Meditation & Mindfulness</a>
+                                <a href="/vedic-philosophy" class="block px-4 py-2 text-gray-300 hover:bg-gray-600 hover:text-teal-300 transition-colors duration-150">Vedic Philosophy</a>
+                                <a href="/lucid-dreaming" class="block px-4 py-2 text-gray-300 hover:bg-gray-600 hover:text-teal-300 transition-colors duration-150">Lucid Dreaming</a>
+                                <a href="/habit-science" class="block px-4 py-2 text-gray-300 hover:bg-gray-600 hover:text-teal-300 transition-colors duration-150">Habit Science</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 border-t border-gray-700 mt-12 py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-gray-400">&copy; 2024 Echo Mind. All rights reserved.</p>
+            <div class="mt-4 flex justify-center space-x-4">
+                <a href="#" class="text-gray-400 hover:text-teal-300 transition">Terms</a>
+                <a href="/index" class="text-gray-400 hover:text-teal-300 transition">Index</a>
+                <a href="/about" class="text-gray-400 hover:text-teal-300 transition">About</a>
+                <a href="#" class="text-gray-400 hover:text-teal-300 transition">Contact</a>
+            </div>
+        </div>
+    </footer> 
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+    
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    
+        // Typing animation for hero text (if applicable)
+        // This would typically be handled by a dedicated JS file or a more complex setup
+        // For simplicity, we'll assume static text for now or a separate script handles it.
+    
+        // Add transition class to body
+        document.body.classList.add('transition-all', 'duration-500', 'ease-in-out');
+    
+        // Niche scroll animation
+        const scrollContent = document.querySelector('.scroll-content');
+        if (scrollContent) {
+            // Duplicate content to create a seamless loop
+            scrollContent.innerHTML += scrollContent.innerHTML;
+    
+            let scrollPosition = 0;
+            const scrollSpeed = 0.5; // Adjust as needed
+    
+            function autoScroll() {
+                scrollPosition += scrollSpeed;
+                if (scrollPosition >= scrollContent.scrollWidth / 2) {
+                    scrollPosition = 0;
+                }
+                scrollContent.style.transform = `translateX(${-scrollPosition}px)`;
+                requestAnimationFrame(autoScroll);
+            }
+            autoScroll();
+        }
+    </script>
+    </body>
+    </html>
+    <head>
+        <style>
+            .loading-spinner {
+                width: 50px;
+                height: 50px;
+                border: 3px solid #2dd4bf;
+                border-radius: 50%;
+                border-top-color: transparent;
+                animation: spin 1s linear infinite;
+            }
+            
+            @keyframes spin {
+                to {transform: rotate(360deg);}
+            }
+            
+            @keyframes continuousBounce {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-4px); }
+            }
+            
+            .continuous-bounce {
+                animation: continuousBounce 2s ease-in-out infinite;
+            }
+        </style>
+    </head>
+    <meta name="description" content="{% block meta_description %}AI-Powered Blog Generator{% endblock %}">
+    <meta name="keywords" content="{% block meta_keywords %}AI, Blog, Technology{% endblock %}">
+    <link rel="canonical" href="{{ request.url }}" />
+    <head>
+        <link rel="icon" href="{{ url_for('static', path='/favicon.ico') }}" type="image/x-icon">

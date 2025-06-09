@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block hero_section %}
+{# This block is intentionally left empty to remove the hero section on the about page #}
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-16">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+            About Echo Mind
+        </h1>
+        
+        <div class="prose prose-lg prose-invert max-w-none">
+            <p class="text-gray-300 mb-8">
+                Echo Mind is an AI-powered platform that explores the intersection of technology, consciousness, and human potential. We decode complex topics and present them in an accessible, meaningful way.
+            </p>
+            
+            <h2 class="text-2xl font-semibold mb-4 text-teal-300">Our Mission</h2>
+            <p class="text-gray-300 mb-8">
+                To bridge the gap between cutting-edge technology and timeless wisdom, creating content that not only informs but transforms.
+            </p>
+            
+            <h2 class="text-2xl font-semibold mb-4 text-teal-300">What We Cover</h2>
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                    <h3 class="text-xl font-semibold mb-3 text-teal-400">Technology & Innovation</h3>
+                    <ul class="list-disc list-inside text-gray-300 space-y-2">
+                        <li>AI News & Developments</li>
+                        <li>Startup Ecosystem</li>
+                        <li>Developer Trends</li>
+                        <li>Tech Ethics</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                    <h3 class="text-xl font-semibold mb-3 text-teal-400">Mind & Consciousness</h3>
+                    <ul class="list-disc list-inside text-gray-300 space-y-2">
+                        <li>Meditation & Mindfulness</li>
+                        <li>Vedic Philosophy</li>
+                        <li>Lucid Dreaming</li>
+                        <li>Habit Science</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

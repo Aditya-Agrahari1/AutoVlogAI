@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EchoMind - Insights from the Frontier of Intelligence</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter for body text, Orbitron for futuristic headers -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Particles.js for ambient background effects -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0b0b0b;
+            color: #f3f4f6;
+        }
+        
+        .orbitron {
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .deep-dark {
+            background-color: #0b0b0b;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #0b0b0b 0%, #111827 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glass-card {
+            background: rgba(16, 16, 24, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .glow-text {
+            text-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
+        }
+        
+        .neural-line {
+            position: absolute;
+            height: 1px;
+            width: 100%;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(56, 189, 248, 0.1) 25%, 
+                rgba(56, 189, 248, 0.3) 50%, 
+                rgba(56, 189, 248, 0.1) 75%, 
+                transparent 100%);
+            animation: pulse 4s infinite;
+            opacity: 0.5;
+        }
+        
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.25; }
+            50% { opacity: 0.5; }
+        }
+        
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+        
+        /* Updated scrolling carousel */
+        .scroll-container {
+            -webkit-mask-image: linear-gradient(90deg, transparent 0%, #fff 10%, #fff 90%, transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0%, #fff 10%, #fff 90%, transparent 100%);
+        }
+        
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        .scroll-content {
+            animation: scroll 40s linear infinite;
+        }
+        
+        .scroll-content:hover {
+            animation-play-state: paused;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-300">
+    <!-- Premium Hero Section -->
+    <div class="hero-gradient text-gray-100 py-32 w-full relative min-h-screen flex items-center justify-center">
+        <!-- Particles Background -->
+        <div id="particles-js"></div>
+        
+        <!-- Neural Network Line Effects -->
+        <div class="neural-line" style="top: 15%;"></div>
+        <div class="neural-line" style="top: 35%;"></div>
+        <div class="neural-line" style="top: 65%;"></div>
+        <div class="neural-line" style="top: 85%;"></div>
+        
+        <!-- Main Content Container -->
+        <div class="container mx-auto px-4 z-10 relative">
+            <!-- Logo -->
+            <div class="flex justify-center mb-16">
+                <div class="flex items-center">
+                    <svg class="w-10 h-10 text-sky-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 14C13.1046 14 14 13.1046 14 12C14 10.8954 13.1046 10 12 10C10.8954 10 10 10.8954 10 12C10 13.1046 10.8954 14 12 14Z" fill="currentColor"/>
+                    </svg>
+                    <h2 class="orbitron text-2xl font-bold ml-2 text-white">EchoMind</h2>
+                </div>
+            </div>
+            
+            <!-- Main Heading -->
+            <h1 class="orbitron text-5xl md:text-6xl lg:text-7xl font-bold mb-8 text-center glow-text text-white">
+                Insights from the Frontier of Intelligence
+            </h1>
+            
+            <!-- Subheading in Glass Card -->
+            <div class="max-w-3xl mx-auto">
+                <div class="glass-card rounded-xl p-6 mb-12">
+                    <p class="text-xl text-gray-300 opacity-90 text-center">
+                        Explore thoughts, innovations, and breakthroughs shaping the future of AI, ethics, and consciousness.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Topic Pills -->
+            <div class="flex justify-center flex-wrap gap-4 mt-12">
+                <span class="px-4 py-2 glass-card rounded-full text-sky-400 text-sm">Neural Networks</span>
+                <span class="px-4 py-2 glass-card rounded-full text-emerald-400 text-sm">Consciousness</span>
+                <span class="px-4 py-2 glass-card rounded-full text-purple-400 text-sm">Ethics</span>
+                <span class="px-4 py-2 glass-card rounded-full text-pink-400 text-sm">Futurism</span>
+                <span class="px-4 py-2 glass-card rounded-full text-amber-400 text-sm">Research</span>
+            </div>
+            
+            <!-- Explore Button -->
+            <div class="flex justify-center mt-16">
+                <a href="/home">
+                    <button class="orbitron px-8 py-3 rounded-lg bg-gradient-to-r from-sky-500 to-indigo-600 text-white font-medium hover:from-sky-600 hover:to-indigo-700 transition-all duration-300 focus:ring-2 focus:ring-sky-400 focus:ring-offset-2 focus:ring-offset-gray-900">
+                    EXPLORE DEEPVERSE
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar (Keeping your existing nav structure) -->
+    <nav class="bg-gray-800 shadow-md sticky top-0 z-50 border-b border-gray-700">
+        <div class="container mx-auto px-8 py-4">
+            <div class="flex justify-between items-center">
+                <a href="/" class="flex items-center space-x-3">
+                    <svg class="w-8 h-8 text-sky-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
+                    </svg>
+                    <span class="orbitron text-xl font-bold text-gray-100 hover:text-sky-300 transition">EchoMind</span>
+                </a>
+                <div class="flex items-center space-x-8">
+                    <div class="flex items-center space-x-6">
+                        <a href="/" class="text-gray-300 hover:text-sky-300 transition">Home</a>
+                        <div class="relative group">
+                            <button class="text-gray-300 hover:text-sky-300 transition flex items-center pb-3">
+                                Categories
+                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <div class="absolute left-0 top-full w-56 bg-gray-700 rounded-md shadow-lg py-1 invisible group-hover:visible transition-all duration-200 ease-in-out z-50">
+                                <div class="absolute h-3 w-full -top-3"></div>
+                                <a href="/ai-research" class="block px-4 py-2 text-gray-300 hover:bg-gray-600 hover:text-sky-300 transition-colors duration-150">AI Research</a>
+                                <a href="/consciousness" class="block px-4 py-2 text-gray-300 hover:bg-gray-600 hover:text-sky-300 transition-colors duration-150">Consciousness</a>
+                                <a href="/ethics" class="block px-4 py-2 text-gray-300 hover:bg-gray-600 hover:text-sky-300 transition-colors duration-150">Ethics & Philosophy</a>
+                                <a href="/tech-trends" class="block px-4 py-2 text-gray-300 hover:bg-gray-600 hover:text-sky-300 transition-colors duration-150">Tech Trends</a>
+                                <a href="/neuroscience" class="block px-4 py-2 text-gray-300 hover:bg-gray-600 hover:text-sky-300 transition-colors duration-150">Neuroscience</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Initialize Particles.js -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS('particles-js', {
+                particles: {
+                    number: { value: 80, density: { enable: true, value_area: 800 } },
+                    color: { value: "#ffffff" },
+                    shape: { type: "circle", stroke: { width: 0, color: "#000000" } },
+                    opacity: { 
+                        value: 0.3, 
+                        random: true,
+                        anim: { enable: true, speed: 0.5, opacity_min: 0.1, sync: false }
+                    },
+                    size: {
+                        value: 3,
+                        random: true,
+                        anim: { enable: true, speed: 2, size_min: 0.1, sync: false }
+                    },
+                    line_linked: {
+                        enable: true,
+                        distance: 150,
+                        color: "#3b82f6",
+                        opacity: 0.2,
+                        width: 1
+                    },
+                    move: {
+                        enable: true,
+                        speed: 0.5,
+                        direction: "none",
+                        random: true,
+                        straight: false,
+                        out_mode: "out",
+                        bounce: false,
+                    }
+                },
+                interactivity: {
+                    detect_on: "canvas",
+                    events: {
+                        onhover: { enable: true, mode: "grab" },
+                        onclick: { enable: true, mode: "push" },
+                        resize: true
+                    },
+                    modes: {
+                        grab: { distance: 140, line_linked: { opacity: 0.5 } },
+                        push: { particles_nb: 3 }
+                    }
+                },
+                retina_detect: true
+            });
+        });
+
+    </script>
+</body>
+</html>

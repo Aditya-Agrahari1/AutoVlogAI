@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block hero_section %}
+{# This block is intentionally left empty to remove the hero section on the about page #}
+{% endblock %}
+
+{% block content %}
+
+  <!-- Main Content -->
+<!-- Main Content -->
+<main class="flex-grow px-6 py-12 md:py-20 max-w-3xl mx-auto">
+    <a href="/" class="text-sm text-cyan-400 hover:underline mb-4 inline-block">← Back to Home</a>
+  
+    <h1 class="text-4xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">Contact Us</h1>
+  
+    <p class="text-lg text-gray-300 mb-8">
+      Have questions, feedback, or just want to say hello? Fill out the form below and we’ll get back to you as soon as possible!
+    </p>
+  
+    <!-- Contact Form -->
+    <form class="space-y-6" id="contactForm">
+      <div>
+        <label for="name" class="block text-sm font-medium text-gray-200 mb-1">Name</label>
+        <input type="text" id="name" name="name" class="w-full px-4 py-2 rounded bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-cyan-400" placeholder="Your Name" required />
+      </div>
+  
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-200 mb-1">Email</label>
+        <input type="email" id="email" name="email" class="w-full px-4 py-2 rounded bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-cyan-400" placeholder="you@example.com" required />
+      </div>
+  
+      <div>
+        <label for="message" class="block text-sm font-medium text-gray-200 mb-1">Message</label>
+        <textarea id="message" name="message" rows="5" class="w-full px-4 py-2 rounded bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-cyan-400" placeholder="Your message here..." required></textarea>
+      </div>
+  
+      <button type="submit" class="bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-2 rounded shadow-md transition duration-200">
+        Send Message
+      </button>
+    </form>
+    <script>
+        const form = document.getElementById("contactForm");
+        const button = form.querySelector("button");
+      
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault(); // Prevent default page reload
+      
+          button.disabled = true;
+          button.innerText = "Sending...";
+          button.classList.add("opacity-60", "cursor-not-allowed");
+      
+          const formData = new FormData(form);
+          
+          try {
+            const response = await fetch("/contacts", {
+              method: "POST",
+              body: formData
+            });
+      
+            const result = await response.json();
+      
+            if (result.success) {
+              showToast("✅ Email sent successfully!");
+              form.reset(); // clear form after success
+            } else {
+              showToast("❌ Failed to send. Try again!");
+            }
+          } catch (error) {
+            showToast("⚠️ Something went wrong!");
+          }
+      
+          button.disabled = false;
+          button.innerText = "Send Message";
+          button.classList.remove("opacity-60", "cursor-not-allowed");
+        });
+      
+        function showToast(message) {
+          const toast = document.createElement("div");
+          toast.innerText = message;
+          toast.className = "fixed bottom-6 right-6 bg-gray-900 text-white px-4 py-2 rounded-lg shadow-lg z-50 transition-opacity duration-300";
+          document.body.appendChild(toast);
+      
+          setTimeout(() => {
+            toast.style.opacity = "0";
+            setTimeout(() => toast.remove(), 300);
+          }, 3000);
+        }
+    </script>
+      
+      
+</main>
+{% endblock %}

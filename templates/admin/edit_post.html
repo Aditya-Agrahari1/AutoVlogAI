@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Post - Admin Panel</title>
+    <style>
+        /* Copy styles from admin_generate.html and add: */
+        .edit-form {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        textarea {
+            width: 100%;
+            min-height: 300px;
+            margin-bottom: 20px;
+            padding: 10px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Admin Panel</h2>
+        <ul class="sidebar-menu">
+            <li>Dashboard</li>
+            <li class="active">Content</li>
+            <li>Scheduler</li>
+            <li>Settings</li>
+        </ul>
+    </div>
+    <div class="main-content">
+        <div class="content-box">
+            <h2>Edit Post</h2>
+            <div class="edit-form">
+                <form action="/admin/post/edit/{{ post._id }}" method="post">
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" name="title" value="{{ post.title }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Meta Description</label>
+                        <input type="text" name="meta_description" value="{{ post.meta_description }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Content (Markdown)</label>
+                        <textarea name="content" required>{{ post.content }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Hashtags (comma-separated)</label>
+                        <input type="text" name="hashtags" value="{{ post.hashtags|join(', ') }}" required>
+                    </div>
+                    <button type="submit">Update Post</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

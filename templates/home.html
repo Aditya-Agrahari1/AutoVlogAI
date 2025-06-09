@@ -1,0 +1,278 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div x-data="{ shown: false }" 
+     x-init="setTimeout(() => shown = true, 100)"
+     x-show="shown"
+     x-transition:enter="page-enter"
+     x-transition:enter-active="page-enter-active"
+     class="bg-gray-800 py-12">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Featured Posts Section - Premium Update -->
+        <div id="featured-articles" class="mb-24">
+            <div class="relative group">
+                <div class="absolute inset-0 bg-gradient-to-r from-teal-500 to-purple-600 rounded-lg opacity-20 blur-3xl group-hover:opacity-30 transition-opacity duration-300"></div>
+                <div class="relative border-l-4 border-teal-400 pl-4 mb-12">
+                    <h2 class="text-4xl lg:text-5xl font-bold text-white mb-2 tracking-tight">
+                        <span class="bg-gradient-to-r from-teal-400 to-purple-400 bg-clip-text text-transparent">
+                            Featured Articles
+                        </span>
+                    </h2>
+                    <p class="text-lg text-gray-400 font-light">Curated excellence in AI research</p>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                {% for post in featured_posts[:2] %}
+                <div class="relative group">
+                    <div class="absolute inset-0 bg-gradient-to-r from-teal-500/20 to-purple-600/20 rounded-2xl transform scale-95 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-500"></div>
+                    <div class="relative bg-gray-700 rounded-2xl shadow-2xl hover:shadow-teal-500/20 transition-all duration-500 overflow-hidden border border-gray-600/50 hover:border-teal-400/30 transform hover:-translate-y-1.5">
+                        {% include "components/featured_post_card.html" %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Section Divider with Animated Gradient -->
+        <div class="my-24 relative">
+            <div class="absolute inset-0 flex items-center">
+                <div class="w-full border-t border-gray-700/50"></div>
+            </div>
+            <div class="relative flex justify-center">
+                <span class="bg-gray-800 px-4 text-2xl text-teal-400 font-light tracking-wide">
+                    <i class="fas fa-arrow-down text-teal-400/50 mr-2"></i>
+                    Latest Insights
+                </span>
+            </div>
+        </div>
+
+        <!-- Latest Posts Section - Premium Update -->
+        <div class="mb-24">
+            <div class="mb-16 text-center">
+                <h3 class="text-3xl font-light text-gray-300 mb-2 tracking-wide">
+                    Fresh Perspectives in
+                    <span class="font-medium bg-gradient-to-r from-purple-400 to-teal-400 bg-clip-text text-transparent relative" id="typing-container">
+                        <span id="typing-text" class="inline-block min-w-[12rem] text-left"></span>
+                        <span class="typing-cursor">|</span>
+                    </span>
+
+                    <script>
+                        class TypingAnimation {
+                            constructor() {
+                                // Check if a specific category is passed from the backend
+                                const categoryTitleElement = document.getElementById('category-title-data');
+                                if (categoryTitleElement && categoryTitleElement.dataset.category) {
+                                    this.niches = [categoryTitleElement.dataset.category];
+                                } else {
+                                    this.niches = [
+                                        'AI News',
+                                        'Startup Ecosystem',
+                                        'Productivity Tools',
+                                        'Dev Trends',
+                                        'Tech Ethics',
+                                        'Meditation & Mindfulness',
+                                        'Vedic Philosophy',
+                                        'Lucid Dreaming',
+                                        'Habit Science'
+                                    ];
+                                }
+                                this.currentIndex = 0;
+                                this.typingText = '';
+                                this.isDeleting = false;
+                                this.typeSpeed = 100;
+                                this.deleteSpeed = 40;
+                                this.pauseDuration = 2000;
+                                this.typingElement = document.getElementById('typing-text');
+                                this.cursorElement = document.querySelector('.typing-cursor');
+
+                                if (this.typingElement) {
+                                    this.type();
+                                } else {
+                                    console.error("Typing element not found.");
+                                }
+                            }
+
+                            type() {
+                                const currentNiche = this.niches[this.currentIndex];
+                                if (this.isDeleting) {
+                                    this.typingText = currentNiche.substring(0, this.typingText.length - 1);
+                                } else {
+                                    this.typingText = currentNiche.substring(0, this.typingText.length + 1);
+                                }
+
+                                this.typingElement.textContent = this.typingText;
+
+                                let typeSpeed = this.typeSpeed;
+                                if (this.isDeleting) {
+                                    typeSpeed /= 2;
+                                }
+
+                                if (!this.isDeleting && this.typingText === currentNiche) {
+                                    typeSpeed = this.pauseDuration;
+                                    this.isDeleting = true;
+                                } else if (this.isDeleting && this.typingText === '') {
+                                    this.isDeleting = false;
+                                    this.currentIndex = (this.currentIndex + 1) % this.niches.length;
+                                    typeSpeed = 500; // Pause before typing next niche
+                                }
+
+                                setTimeout(() => this.type(), typeSpeed);
+                            }
+                        }
+
+                        document.addEventListener('DOMContentLoaded', () => {
+                            new TypingAnimation();
+                        });
+                    </script>
+                </span>
+            </div>
+        </div>
+
+        <!-- Hidden element to pass category data -->
+        {% if category_title %}
+        <div id="category-title-data" data-category="{{ category_title }}" style="display:none;"></div>
+        {% endif %}
+
+        <!-- Featured Articles Section -->
+        <section class="mb-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="articles-container">
+                {% if posts %}
+                    {% for post in posts %}
+                    <div class="transform hover:-translate-y-2 transition-all duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)] post-item">
+                        <div class="transform hover:-translate-y-2 transition-all duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)]">
+                            <a href="/post/{{ post._id }}" class="block h-full">
+                                <div class="bg-gray-700/50 rounded-xl shadow-xl hover:shadow-teal-500/10 transition-shadow duration-300 overflow-hidden border border-gray-600/30 backdrop-blur-sm">
+                                    {% include "components/post_card.html" %}
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                <!-- Premium Empty State -->
+                <div class="col-span-full py-16 text-center">
+                    <div class="max-w-md mx-auto">
+                        <div class="mb-6 text-6xl text-gray-600">
+                            <i class="fas fa-comment-slash"></i>
+                        </div>
+                        <h4 class="text-xl font-light text-gray-400 mb-2">No articles found</h4>
+                        <p class="text-gray-500 text-sm">New insights coming soon</p>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- "View More" Button -->
+            <div id="view-more-container" class="text-center mt-12" style="display: none;">
+                <button id="view-more-btn" class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-6 rounded-full transition duration-300 ease-in-out transform hover:-translate-y-1 shadow-lg">
+                    View More Articles
+                </button>
+            </div>
+        </div>
+
+        <!-- Pagination Section - Premium Update -->
+        {% if pagination and pagination.total_pages > 1 %}
+        <div class="mt-24 border-t border-gray-700/50 pt-16">
+            <div class="flex justify-center items-center gap-4">
+                <!-- Previous Button -->
+                {% if pagination.current > 1 %}
+                <a href="/page/{{ pagination.current - 1 }}" 
+                   class="flex items-center justify-center px-6 py-3 border border-gray-600/50 rounded-xl bg-gray-700/50 text-gray-300 font-light hover:bg-gray-600/50 hover:text-teal-300 transition-all duration-300 shadow-sm hover:shadow-teal-500/10">
+                   <i class="fas fa-chevron-left text-sm mr-2"></i>
+                   Previous
+                </a>
+                {% endif %}
+
+                <!-- Page Numbers -->
+                <div class="flex space-x-2">
+                    {% for page in pagination.page_range %}
+                        {% if page == pagination.current %}
+                        <span class="px-6 py-3 border-2 border-teal-400/30 rounded-xl bg-gray-600/50 text-teal-300 font-medium shadow-sm backdrop-blur-sm">
+                            {{ page }}
+                        </span>
+                        {% else %}
+                        <a href="/page/{{ page }}" 
+                           class="px-6 py-3 border border-gray-600/50 rounded-xl bg-gray-700/50 text-gray-300 font-light hover:bg-gray-600/50 hover:border-teal-400/20 hover:text-teal-300 transition-all duration-300 shadow-sm hover:shadow-teal-500/10">
+                            {{ page }}
+                        </a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+                <!-- Next Button -->
+                {% if pagination.current < pagination.total_pages %}
+                <a href="/page/{{ pagination.current + 1 }}" 
+                   class="flex items-center justify-center px-6 py-3 border border-gray-600/50 rounded-xl bg-gray-700/50 text-gray-300 font-light hover:bg-gradient-to-r hover:from-teal-400/10 hover:to-purple-400/10 hover:text-teal-300 transition-all duration-300 shadow-sm hover:shadow-teal-500/10">
+                   Next
+                   <i class="fas fa-chevron-right text-sm ml-2"></i>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const articlesContainer = document.getElementById('articles-container');
+        const postItems = articlesContainer.querySelectorAll('.post-item');
+        const viewMoreBtn = document.getElementById('view-more-btn');
+        const viewMoreContainer = document.getElementById('view-more-container');
+        const articlesPerPage = 3;
+        let currentIndex = articlesPerPage;
+
+        function showArticles() {
+            for (let i = 0; i < postItems.length; i++) {
+                if (i < currentIndex) {
+                    postItems[i].style.display = 'block';
+                } else {
+                    postItems[i].style.display = 'none';
+                }
+            }
+
+            if (currentIndex < postItems.length) {
+                viewMoreContainer.style.display = 'block';
+            } else {
+                viewMoreContainer.style.display = 'none';
+            }
+        }
+
+        viewMoreBtn.addEventListener('click', function() {
+            currentIndex += articlesPerPage;
+            showArticles();
+        });
+
+        showArticles(); // Initial display
+    });
+</script>
+
+<style>
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes fadeOut {
+        from { opacity: 1; transform: translateY(0); }
+        to { opacity: 0; transform: translateY(-10px); }
+    }
+    
+    .fadeIn {
+        animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+    
+    .fadeOut {
+        animation: fadeOut 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+    
+    /* Cursor animation */
+    .typing-cursor {
+        display: inline-block;
+        width: 2px;
+        animation: blink 0.7s infinite;
+    }
+</style>
+{% endblock %}

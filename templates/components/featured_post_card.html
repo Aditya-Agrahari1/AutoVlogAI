@@ -1,0 +1,40 @@
+<div class="bg-white rounded-xl shadow-sm overflow-hidden">
+    <div class="md:flex">
+        {% if post.image_url %}
+        <div class="md:w-1/2">
+            <img src="{{ post.image_url }}" 
+                 alt="{{ post.title }}" 
+                 class="w-full h-full object-cover"
+                 onerror="this.src='https://placehold.co/800x400/e2e8f0/1a237e?text=Blog+Post+Image'">
+        </div>
+        {% else %}
+        <div class="md:w-1/2">
+            <img src="https://placehold.co/800x400/e2e8f0/1a237e?text=Blog+Post+Image"
+                 alt="{{ post.title }}" 
+                 class="w-full h-full object-cover">
+        </div>
+        {% endif %}
+        
+        <div class="p-8 md:w-1/2">
+            {% if post.badge %}
+            <span class="inline-block px-3 py-1 text-sm font-semibold text-blue-600 bg-blue-100 rounded-full mb-4">
+                {{ post.badge }}
+            </span>
+            {% endif %}
+            
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">
+                <a href="/post/{{ post._id }}" class="hover:text-blue-600 transition-colors">
+                    {{ post.title }}
+                </a>
+            </h3>
+            
+            <p class="text-gray-600 mb-6">{{ post.meta_description }}</p>
+            
+            <div class="flex flex-wrap gap-2">
+                {% for tag in post.hashtags %}
+                <span class="text-sm text-gray-500">#{{ tag }}</span>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
