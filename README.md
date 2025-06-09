@@ -101,6 +101,7 @@ Then open http://localhost:8000 in your browser.
 Add the following Start Command in Render:
 
 uvicorn main:app --host 0.0.0.0 --port $PORT
+
 Set your .env variables (Gmail, NewsAPI, etc.) in Render's environment settings.
 
 ## 🧑‍💻 Contributing
@@ -119,6 +120,7 @@ Free to use, build upon, and innovate!
 Made with ❤️ by Aditya Agrahari
 
 📩 Email: techVeltrix@gmail.com
+
 📲 Telegram: @xKiteretsu
 
 🧘‍♂️ "Echo the mind. Automate the grind."
