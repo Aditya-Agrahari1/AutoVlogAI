@@ -93,7 +93,9 @@ Then open http://localhost:8000 in your browser.
 
 ## 📨 Contact Form Support
 ✅ Sends user queries via Gmail SMTP
+
 ✅ Works with Render & other deployment platforms
+
 ✅ Shows user-friendly confirmation popup
 
 
@@ -106,14 +108,19 @@ Set your .env variables (Gmail, NewsAPI, etc.) in Render's environment settings.
 
 ## 🧑‍💻 Contributing
 Love automation + AI + content?
+
 Contributions, issues, and suggestions are welcome!
+
 Fork this repo
+
 Make changes
+
 Submit a pull request
 
 
 ## 📜 License
 Licensed under the MIT License.
+
 Free to use, build upon, and innovate!
 
 ## 🔗 Connect
