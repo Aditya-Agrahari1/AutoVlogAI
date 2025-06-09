@@ -8,7 +8,7 @@ Echo Mind is a cutting-edge AI-powered blogging platform that autonomously gener
 
 ## 🌐 Live Preview
 
-Check out the live website here: [https://echomind-lvlj.onrender.com](https://echomind-lvlj.onrender.com)
+Check out the live website here: [EchoMind](https://echomind-lvlj.onrender.com)
 
 ---
 ## 🧠 What It Does
@@ -84,8 +84,8 @@ An admin panel is available to manage blog posts — including generating, editi
 
 ### 1. Clone the repository
 
-git clone https://github.com/Aditya-Agrahari1/EchoMind.git
-cd EchoMind
+git clone https://github.com/Aditya-Agrahari1/AutoVlogAI.git
+cd AutoVlogAI
 
 2. Create a virtual environment
 python -m venv venv
