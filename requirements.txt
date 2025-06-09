@@ -12,4 +12,4 @@ google-generativeai
 pymongo
 motor
 cloudinary
-
+flask
