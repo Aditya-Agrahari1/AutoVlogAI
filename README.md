@@ -113,7 +113,7 @@ Then open http://localhost:8000 in your browser.
 ## 🌍 Deploying to Render
 Add the following Start Command in Render:
 
-uvicorn main:app --host 0.0.0.0 --port $PORT
+uvicorn src.main:app --host 0.0.0.0 --port $PORT
 
 Set your .env variables (Gmail, NewsAPI, etc.) in Render's environment settings.
 
