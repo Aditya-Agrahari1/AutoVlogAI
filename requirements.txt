@@ -1,0 +1,15 @@
+fastapi
+uvicorn
+jinja2
+python-dotenv
+markdown2
+email-validator
+aiofiles
+httpx
+python-multipart
+requests
+google-generativeai
+pymongo
+motor
+cloudinary
+
