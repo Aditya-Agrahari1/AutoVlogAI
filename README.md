@@ -91,7 +91,7 @@ pip install -r requirements.txt
 uvicorn src.main:app --reload
 Then open http://localhost:8000 in your browser.
 
-##📨 Contact Form Support
+## 📨 Contact Form Support
 ✅ Sends user queries via Gmail SMTP
 ✅ Works with Render & other deployment platforms
 ✅ Shows user-friendly confirmation popup
