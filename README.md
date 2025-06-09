@@ -35,7 +35,7 @@ Check out the live website here: [https://echomind-lvlj.onrender.com](https://ec
 - 🖼️ Image + shareable snippet  
 - ⏱️ Created & posted daily (auto-scheduled support coming soon!)
 
-  
+
 ## 🧠 Features
 
 - ✨ **AI-Powered Article Generation**
@@ -54,7 +54,17 @@ Check out the live website here: [https://echomind-lvlj.onrender.com](https://ec
 - ⚙️ **MongoDB + Cloudinary Support**
   - Store content and assets dynamically  
 
+- 🔐 **Admin Panel**
+  - To manage blog posts - generating, editing, or deleting vlogs
 ---
+
+## 🔐 Admin Panel
+
+An admin panel is available to manage blog posts — including generating, editing, or deleting vlogs.
+
+🔗 Access it here: http://localhost:8000/admin/generate  
+🧾 The panel is protected by a username/password login for security.
+
 
 ## 🚧 Tech Stack
 
