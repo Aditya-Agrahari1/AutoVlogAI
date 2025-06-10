@@ -106,7 +106,7 @@ uvicorn src.main:app --reload
 Then open http://localhost:8000 in your browser.
 
 
-## Directory structure:
+<pre> ```bash ## Directory structure:
 └── aditya-agrahari1-autovlogai/
     ├── README.md
     ├── package.json
@@ -142,7 +142,8 @@ Then open http://localhost:8000 in your browser.
         │   └── edit_post.html
         └── components/
             ├── featured_post_card.html
-            └── post_card.html
+            └── post_card.html ``` </pre>
+
 
 ## 📨 Contact Form Support
 ✅ Sends user queries via Gmail SMTP
