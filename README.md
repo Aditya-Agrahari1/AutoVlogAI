@@ -89,16 +89,19 @@ An admin panel is available to manage blog posts — including generating, editi
  cd AutoVlogAI
 
 2. Create a virtual environment
+ 
 python -m venv venv
+
 source venv/bin/activate    # For Linux/macOS
+
 venv\Scripts\activate       # For Windows
 
-3. Install dependencies
+5. Install dependencies
 pip install -r requirements.txt
 
-4. Setup .env file
+6. Setup .env file
 
-5. Run the server
+7. Run the server
 uvicorn src.main:app --reload
 Then open http://localhost:8000 in your browser.
 
