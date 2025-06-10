@@ -105,6 +105,45 @@ pip install -r requirements.txt
 uvicorn src.main:app --reload
 Then open http://localhost:8000 in your browser.
 
+
+## Directory structure:
+└── aditya-agrahari1-autovlogai/
+    ├── README.md
+    ├── package.json
+    ├── requirements.txt
+    ├── logs/
+    ├── src/
+    │   ├── main.py
+    │   ├── __pycache__/
+    │   ├── database/
+    │   │   ├── mongodb.py
+    │   │   └── __pycache__/
+    │   └── services/
+    │       ├── __init__.py
+    │       ├── content_generator.py
+    │       ├── news_service.py
+    │       └── __pycache__/
+    ├── static/
+    │   ├── New Text Document.txt
+    │   └── images/
+    └── templates/
+        ├── about.html
+        ├── admin_generate.html
+        ├── base.html
+        ├── contact.html
+        ├── home.html
+        ├── index.html
+        ├── post.html
+        ├── preview.html
+        ├── success.html
+        ├── terms.html
+        ├── admin/
+        │   ├── dashboard.html
+        │   └── edit_post.html
+        └── components/
+            ├── featured_post_card.html
+            └── post_card.html
+
 ## 📨 Contact Form Support
 ✅ Sends user queries via Gmail SMTP
 
