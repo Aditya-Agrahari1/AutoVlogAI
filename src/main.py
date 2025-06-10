@@ -24,10 +24,14 @@ from email.mime.multipart import MIMEMultipart
 import time
 from flask import Flask, render_template, request
 from datetime import datetime
-import os  # Add this import
-from fastapi.responses import FileResponse  # Add this import
+import os   
+from fastapi.responses import FileResponse   
 
 load_dotenv()
+
+# Don't Forget to Star the Repo ⭐ [https://github.com/Aditya-Agrahari1/AutoVlogAI]
+#Support OpenSource
+
 
 YOUR_EMAIL = os.getenv("YOUR_EMAIL")
 APP_PASSWORD = os.getenv("APP_PASSWORD")
@@ -51,13 +55,6 @@ logger = logging.getLogger(__name__)
 
 from datetime import datetime
 
-# Add this after creating the FastAPI app
-# Change this line
-# Remove this line:
-# app.mount("/static", StaticFiles(directory="../static"), name="static")
-
-# Add this instead:
-
 static_dir = os.path.join(os.path.dirname(__file__), "..", "static")
 app.mount("/static", StaticFiles(directory=static_dir), name="static")
 
@@ -66,7 +63,7 @@ async def add_global_context(request: Request, call_next):
     response = await call_next(request)
     return response
 
-# Add this to your FastAPI app setup
+ 
 templates.env.globals["current_year"] = lambda: datetime.now().year
 
 @app.get("/")
@@ -103,7 +100,7 @@ async def home(request: Request):
         
     except Exception as e:
         logger.error(f"Error in home route: {e}")
-        return templates.TemplateResponse("home.html", {  # Changed from home.html to index.html
+        return templates.TemplateResponse("home.html", {   
             "request": request, 
             "posts": [],
             "featured_posts": [],
@@ -354,15 +351,10 @@ async def paginated_posts(request: Request, page_number: int = 1):
         logger.error(f"Pagination error: {e}")
         return RedirectResponse(url="/")
 
-# First, remove all duplicate category routes and keep only these routes in this order:
 
-# 1. Add the search route BEFORE any catch-all routes
-# Remove these imports if they're only used for search
 from fastapi import FastAPI, Request
 from fastapi.templating import Jinja2Templates
 
-# Remove the entire search route
-# DELETE this section:
 @app.get("/search")
 async def search_posts(request: Request, q: str = ""):
     try:
@@ -377,7 +369,6 @@ async def search_posts(request: Request, q: str = ""):
         # Search in MongoDB
         posts = await content_generator.db.search_posts(q)
         
-        # Convert markdown content for display
         for post in posts:
             if 'content' in post:
                 post['content'] = markdown2.markdown(post['content'])
@@ -398,9 +389,6 @@ async def search_posts(request: Request, q: str = ""):
             "error": "An error occurred while searching"
         })
 
-# 2. Keep all admin routes
-
-# 3. Finally, keep only this version of the category route at the END
 @app.get("/{category}")
 async def category_page(request: Request, category: str):
     # Define valid categories
@@ -859,3 +847,5 @@ if __name__ == "__main__":
     port = int(os.getenv("PORT", 8000))  # Render injects the correct PORT
     uvicorn.run("main:app", host="0.0.0.0", port=port)
 
+# Don't Forget to Star the Repo ⭐ [https://github.com/Aditya-Agrahari1/AutoVlogAI]
+#Support OpenSource
