@@ -105,7 +105,7 @@ pip install -r requirements.txt
 uvicorn src.main:app --reload
 Then open http://localhost:8000 in your browser.
 
-
+ ## Directory structure:
 <pre> ```bash ## Directory structure:
 └── aditya-agrahari1-autovlogai/
     ├── README.md
